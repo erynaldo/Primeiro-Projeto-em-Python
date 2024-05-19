@@ -1,8 +1,7 @@
 .env
-.gitignore
 database.db
 init_db.py
 app_um.py
-__pycache__
-tutorial-env
+__pycache__/
+tutorial-env/
 primeiro_passoDois.html
