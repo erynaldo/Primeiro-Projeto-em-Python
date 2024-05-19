@@ -159,7 +159,6 @@ def msg_entrada_ja_registrada():
     return render_template('msg_entrada_ja_registrada.html')
 
 
-
 def execute_sql_file(filename, primeiraConexao):
     # Abre o arquivo SQL e lê o conteúdo
     with open(filename, 'r') as file:
