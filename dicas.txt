@@ -23,7 +23,8 @@
 PARA DESINSTALAR UM MÓDULO BASTA DIGITAR O COMANDO:    
     pip uninstall flask-sqlalchemy
 
-
+9ª - DICA: PARA FAZER DEPLOY. GERAR O ARQUIVO CONTENDO AS BIBLIOTECAS QUE FORAM REQUERIDAS
+    DIGITA O COMANDO: pip freeze > "requirements.txt"
 
 Para criar um ambiente virtual, escolha um diretório onde deseja colocá-lo e execute o módulo venv como um script com o caminho do diretório:
 python -m venv tutorial-env.
