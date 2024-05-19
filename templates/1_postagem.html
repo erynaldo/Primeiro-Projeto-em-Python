@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Flask Blog</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h1>{% block title %} Postagens {% endblock %}</h1>
+ 
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título Postagem</th>
+                <th>Data e Hora</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>
+                    <span>{{ post['id'] }}</span>
+                </td>
+                <td>
+                    <a href="{{ url_for('post', post_id=post['id']) }}">
+                        <span>{{ post['title'] }}</span>
+                    </a>
+                </td>
+                <td>
+                    <span class="badge badge-primary">{{ post['created']}}</span>
+                </td>
+                <td>
+                    <a href="{{ url_for('edit', id=post['id']) }}">
+                        <span class="badge badge-warning">Editar</span>
+                    </a>
+                </td>
+                <td>
+                    <!-- <form action="{{ url_for('delete', id=post['id']) }}" method="POST"> -->
+                    <a href="{{ url_for('delete', id=post['id']) }}">
+                        <button type="submit" class="badge badge-danger btn-excluir" value="" onclick="return confirm('Tem certeza de que deseja excluir esta postagem?')">Excluir</button>
+                    </a>
+                    <!-- </form> -->
+                </td>
+            </tr>
+            {% endfor %}
+    {% endblock %}
+        </tbody>
+    </table>
+    
+        <!-- <hr>
+
+        {% for post in posts %}
+            <a href="{{ url_for('post', post_id=post['id']) }}">
+                <h2>{{ post['title'] }}</h2>
+            </a>
+            <span class="badge badge-primary">{{ post['created'] }}</span>
+            <hr>
+        {% endfor %} -->
+
+</body>
+</html>

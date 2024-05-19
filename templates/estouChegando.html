@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename= 'img/favicon.ico') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Feedback</title>
+</head>
+<body>
+    
+{% block content %}
+    <div class="page2"> 
+        {% if cpf_ra != "" %}
+            <form action="" method="" class="formulario" id="myForm">{{ csrf_token }}
+                <p class="cpf">CPF/RA: {{ cpf_ra }}</p>
+                <hr/>
+                <input type="text" id="cpf_ra" name="cpf_ra" value="{{ request.form['cpf_ra'] }}" hidden>
+                            
+                <label>Como você se sente agora?</label>
+                <div class="cx-emoji">
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/feliz.jpg') }}" alt="Feliz" width="46" height="46" title="Feliz"/>
+                        <br/><input type="radio" id="status_chegada" name="status_chegada" value="FELIZ" required>                  
+                        <span>FELIZ</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/calmo.jpg') }}" alt="Calmo" width="46" height="46" title="Calmo"/>
+                        <br/><input type="radio" id="status_chegada" name="status_chegada" value="CALMO" required>
+                        <span>CALMO</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/ansioso.png') }}" alt="Ansioso" width="46" height="46" title="Ansioso"/>
+                        <br/><input type="radio" id="status_chegada" name="status_chegada" value="ANSIOSO" required>
+                        <span>ANSIOSO</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/irritado.jpg') }}" alt="Irritado" width="46" height="46" title="Irritado"/>
+                        <br/><input type="radio" id="status_chegada" name="status_chegada" value="IRRITADO" required>
+                        <span>IRRITADO</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/triste.jpg') }}" alt="Triste" width="46" height="46" title="Triste"/>
+                        <br/><input type="radio" id="status_chegada" name="status_chegada" value="TRISTE" required>
+                        <span>TRISTE</span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn" value="" onclick="submitForm()">Enviar</button>
+                <!-- <a href="{{ url_for('passoDois')}}">Voltar</a> -->
+                <p><a href="javascript:history.back()" class="link-voltar">Voltar</a></p>
+            </form>
+
+            <script>
+                function submitForm() {
+                    document.getElementById("myForm").addEventListener("submit", function(event) {
+                        
+                        event.preventDefault();
+
+                        var cpf_ra = document.getElementById("cpf_ra").value;
+                        var status_chegada = document.getElementById("status_chegada").value;
+                        
+                        // Verificar se os campos estão vazios
+                        if (cpf_ra === "" || status_chegada === "") {
+                            alert("Por favor, preencha todos os campos.");
+                            return false; // Impede o envio do formulário
+                        } else {
+                            var form = document.getElementById("myForm");
+                            var formData = new FormData(form);
+                
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "/respostaChegada", true);
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    // alert("Dados enviados com sucesso.");
+                                    // alert("Dados enviados. Obrigado por sua participação nesta pesquisa.");
+                                    window.location.href = "/msgSuccess";
+                                }
+                            };
+                            xhr.send(formData);
+                        }
+                    })
+                }
+            </script>
+
+        {% endif %}
+    </div>
+{% endblock %}
+
+</body>
+</html>

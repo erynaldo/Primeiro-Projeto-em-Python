@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Home</title>
+</head>
+<body>
+    <!-- <h2>Seja bem vindo ao meu portifólio!</h2> -->
+    {% extends 'base.html' %} 
+
+    {% block content %}
+
+    <h1>{% block title %} {% endblock %}</h1> 
+    <br><br>
+    <form action="{{ url_for('passoDois')}}" method="POST" class="formulario">{{ csrf_token }}
+        <label for="cpf_ra">Informe seu CPF ou RA</label>
+        <input type="text" placeholder="CPF ou RA" name="cpf_ra" maxlength="11" required>
+        <span class="notas">Somente numeros, sem os demais caracteres.</span>
+        <input type="submit" class="btn btn-outline-success" value="Continuar">
+    </form>
+
+    {% endblock %} 
+</body>
+</html>

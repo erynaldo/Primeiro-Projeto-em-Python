@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename= 'img/favicon.ico') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Feedback</title>
+</head>
+<body>
+{% block content %}
+    
+    <div class="page"> 
+        {% if cpf_ra != "" %}
+        <div class="formLogin">
+            <p class="cpf">CPF/RA: {{ cpf_ra }}</p>
+            <hr/>
+            <label>Escolha uma opção:</label>
+            <form action="{{ url_for('estouChegando') }}" method="POST" class="">{{ csrf_token }}
+                <input type="text" name="cpf_ra" value="{{ request.form['cpf_ra'] }}" hidden /><br>
+                <button type="submit" class="btn-link chegando" value="">Estou chegando</button>
+            </form>
+            
+            <form action="{{ url_for('estouSaindo') }}" method="POST" class="">{{ csrf_token }}
+                <input type="text" name="cpf_ra" value="{{ request.form['cpf_ra'] }}" hidden /><br>
+                <button type="submit" class="btn-link saindo" value="">Estou saindo</button>
+            </form>
+            <p><a href="javascript:history.back()" class="link-voltar">Voltar</a></p>
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}
+</body>
+</html>

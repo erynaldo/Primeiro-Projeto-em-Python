@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>My Sql</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+
+    <h3>Listar dados da base MySQL</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pegaBanco in vemBanco %}
+        <tr>
+            <td>{{ pegaBanco[0] }}</td>
+            <td>{{ pegaBanco[1] }}</td>
+            <td>{{ pegaBanco[2] }}</td>
+            <td>
+                <a href="">
+                    <button type="submit" class="badge badge-danger btn-excluir" value="" onclick="return confirm('Tem certeza de que deseja excluir esta postagem?')">Excluir</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <!-- <hr class="linha"/> -->
+
+        <p>Data de hoje: {{ dataHj }}</p>
+        <p>Informa a data: <input type="date"></p><br>
+        <!-- <div>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Atividade</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pegaBanco in resultados %}
+                    <tr>
+                        <td>{{ pegaBanco[0] }}</td>
+                        <td>{{ pegaBanco[1] }}</td>
+                        <td>{{ pegaBanco[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>     -->
+    {% endblock %}
+</body>
+</html>

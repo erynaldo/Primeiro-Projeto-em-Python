@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename= 'img/favicon.ico') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Feedback</title>
+</head>
+<body>
+{% block content %}
+
+    <div class="page">
+        <!-- <form method="GET" action="choose" class="formulario"> -->
+        <form action="{{ url_for('passoDois')}}" method="POST" class="formLogin">{{ csrf_token }}
+            <div class="imgSeduckaton">
+                <img src="{{ url_for('static', filename= 'img/seduckaton.jpg') }}" alt="Seduckathon" width="180" height="" title="Seduckathon"/>
+            </div>
+            
+            <h2>Seja bem vindo!</h2>
+            <p>Contribua com nossa pesquisa</p>
+            <label for="cpf_ra">Informe seu CPF ou RA</label>
+            <input type="text" id="cpf_ra" name="cpf_ra" onkeypress="return onlynumber();" autocomplete="off" minlength="11" maxlength="11" placeholder="CPF ou RA" autofocus="true" required value="01003133371" />
+            <button type="submit" value="" class="btn">Continuar</button>
+            <div class="imgSeduc">
+                <img src="{{ url_for('static', filename= 'img/seducpi.png') }}" alt="SEDUC-PI" width="240" height="" title="SEDUC-PI"/>
+            </div>
+        </form>
+    </div>
+
+    <!-- Script para aceitar somente numeros no campo input do cpf -->
+    <script type='text/javascript' language="javascript">
+        function onlynumber(evt) {
+            var theEvent = evt || window.event;
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode( key );
+            var regex = /^[0-9.]+$/;
+            if( !regex.test(key) ) { 
+            theEvent.returnValue = false;
+            if(theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
+
+{% endblock %}
+</body>
+</html>

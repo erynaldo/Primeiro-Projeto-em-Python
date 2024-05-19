@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Criar uma nova Postagem {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" name="title"
+               placeholder="Post título" class="form-control"
+               value="{{ request.form['title'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Conteúdo</label>
+        <textarea name="content" placeholder="Post conteúdo"
+                  class="form-control">{{ request.form['content'] }}</textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+</form>
+{% endblock %}

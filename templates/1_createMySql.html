@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- O QUE EU COLOCO AQUI VAI SER O NOME DA PAGINA -->
+<h3>{% block title %} Cadastrar novo usuario - db MySQL {% endblock %}</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome"
+               placeholder="Informe seu nome" class="form-control"
+               value="" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email"
+               placeholder="Informe seu email" class="form-control"
+               value="{{ request.form['email'] }}" required/>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+</form>
+{% endblock %}

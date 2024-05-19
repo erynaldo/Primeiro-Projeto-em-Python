@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Flask Blog</title>
+</head>
+<body>
+    <!-- <h2>Seja bem vindo ao meu portifólio!</h2> -->
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+
+    {% if cpf_ra != "" %}
+        <h2>CPF/Ra: {{ cpf_ra }}</h2>
+        <form action="{{ url_for('passoDois')}}" method="POST">{{ csrf_token }}
+            <label for="cpf_ra">CPF/RA</label>
+            <input type="text" placeholder="CPF/RA" name="cpf_ra" value="{{ request.form['cpf_ra'] }}" disabled><br>
+            <label for="nome">Nome</label>
+            <input type="text" placeholder="Nome" name="nome" value=""><br>
+            <label for="email">Email</label>
+            <input type="text" placeholder="Email" name="email" value=""><br>
+            <input type="submit" value="Avançar">
+        </form>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

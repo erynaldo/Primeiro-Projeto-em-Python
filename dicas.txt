@@ -1,0 +1,36 @@
+1º PASSO - Criar um ambiente virtual
+    Digita o comando: python -m venv nome_do_ambiente_virtual
+2º PASSO - Ativar o ambiente virtual
+    Digita o comando: nome_do_ambiente_virtual\Scripts\activate
+3º PASSO - Confirma se ativou o ambiente virtual
+    Digita o comando: pip list
+
+1ª DICA - Caso queira atualizar o pip (instalador de pacotes do python)
+    Digita o comando: python -m pip install --upgrade pip
+2ª DICA - Caso queira desativar o ambiente virtual
+    Digita o comando: deactivate
+3ª DICA - Instalar o Flask
+    Digita o comando: python -m pip install Flask
+4ª DICA - Instalar o módulo MySQL no Flask Python - disponivel em https://github.com/alexferl/flask-mysqldb
+    Digita o comando: pip install flask-mysqldb
+5ª DICA - Instalar o módulo MySQL Connector Python
+    Digita o comando: pip install mysql-connector-python
+6ª DICA - Depois de instalar o Flask e o MySQL, é hora de rodar o servidor
+    Digita o comando: python -m flask run    ou  python app.py
+7ª - Pare o aplicativo usando Ctrl+C no terminal.
+8ª - DICA:  PARA INSTALAR O PYTHON DOTEVN
+    DIGITA O COMANDO: pip install python-dotenv
+PARA DESINSTALAR UM MÓDULO BASTA DIGITAR O COMANDO:    
+    pip uninstall flask-sqlalchemy
+
+
+
+Para criar um ambiente virtual, escolha um diretório onde deseja colocá-lo e execute o módulo venv como um script com o caminho do diretório:
+python -m venv tutorial-env.
+tutorial-env\Scripts\activate.
+source tutorial-env/bin/activate.
+
+https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3-pt#pre-requisitos
+
+
+https://kinsta.com/pt/blog/aplicativo-python-flask/

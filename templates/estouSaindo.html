@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename= 'img/favicon.ico') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Feedback</title>
+</head>
+
+<body>
+
+{% block content %}
+    <div class="page2"> 
+        {% if cpf_ra != "" %}
+            <form action="" method="" class="formulario" id="myForm">{{ csrf_token }}
+                <!-- <hr/> -->
+                <p class="cpf">CPF/RA: {{ cpf_ra }}</p>
+                <hr/>
+                <p hidden>Hoje: {{ dataHj }}</p>
+                <input type="text" id="cpf_ra" name="cpf_ra" value="{{ request.form['cpf_ra'] }}" hidden>
+
+                <label>Como você se sente agora?</label>
+                <div class="cx-emoji">
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/feliz.jpg') }}" alt="Feliz" width="46" height="46" title="Feliz"/>
+                        <br/><input type="radio" id="status_saida" name="status_saida" value="FELIZ" required>                  
+                        <span for="">FELIZ</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/calmo.jpg') }}" alt="Calmo" width="46" height="46" title="Calmo"/>
+                        <br/><input type="radio" id="status_saida" name="status_saida" value="CALMO" required>
+                        <span for="">CALMO</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/ansioso.png') }}" alt="Ansioso" width="46" height="46" title="Ansioso"/>
+                        <br/><input type="radio" id="status_saida" name="status_saida" value="ANSIOSO" required>
+                        <span for="">ANSIOSO</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/irritado.jpg') }}" alt="Irritado" width="46" height="46" title="Irritado"/>
+                        <br/><input type="radio" id="status_saida" name="status_saida" value="IRRITADO" required>
+                        <span for="">IRRITADO</span>
+                    </div>
+
+                    <div class="emoji">
+                        <img src="{{ url_for('static', filename= 'img/triste.jpg') }}" alt="Triste" width="46" height="46" title="Triste"/>
+                        <br/><input type="radio" id="status_saida" name="status_saida" value="TRISTE" required>
+                        <span for="">TRISTE</span>
+                    </div>
+                </div>
+
+
+                <label>Marque a(s) atividade(s) que você mais gostou</label>
+                <div class="cx-check">
+                    {% for pegaBanco in result %}
+                        <input type="checkbox" class="get_value" id="atividades" name="atividades_gostou" value="{{ pegaBanco[1] }}"><span class="atividade">{{ pegaBanco[1] }}</span><br>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn" value="" onclick="submitForm()">Enviar</button>
+                <!-- <a href="{{ url_for('passoDois')}}">Voltar</a> -->
+                <p><a href="javascript:history.back()" class="link-voltar">Voltar</a></p>
+            </form>
+        
+            <script>
+                function submitForm() {
+                    document.getElementById("myForm").addEventListener("submit", function(event) {
+                        
+                        event.preventDefault();
+
+                        var cpf_ra = document.getElementById("cpf_ra").value;
+                        var status_chegada = document.getElementById("status_saida").value;
+            
+                        // Verificar se os campos estão vazios
+                        if (cpf_ra === "" || status_saida === "") {
+                            alert("Por favor, preencha todos os campos.");
+                            return false; // Impede o envio do formulário
+                        } else {
+                            var form = document.getElementById("myForm");
+                            var formData = new FormData(form);
+                
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "/respostaSaida", true);
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    // alert("Dados enviados com sucesso.");
+                                    // alert("Dados enviados. Obrigado por sua participação nesta pesquisa.");
+                                    window.location.href = "/msgSuccess";
+                                }
+                            };
+                            xhr.send(formData);
+                        }
+                    })
+                }
+            </script>
+        
+        {% endif %}
+    </div>
+{% endblock %}
+</body>
+</html>
